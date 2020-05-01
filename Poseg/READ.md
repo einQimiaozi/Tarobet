@@ -20,24 +20,24 @@
        ```python
        from Poseg import poseg
 
-      word_seg1 = poseg.load_engine_DatTire()
-      text1 = '工商部联合工商行政管理局执法'
-      text2 = '一万九千下岗工人再就业率提高'
-      text3 = 'C++经常用于信息技术领域'
-      text4 = '我不想开学，我不想隔离'
-      res1 = word_seg1.segment(text1)
-      res2 = word_seg1.segment(text2)
-      res3 = word_seg1.segment(text3)
-      res4 = word_seg1.segment(text4)
-      print(res1)
-      print(res2)
-      print(res3)
-      print(res4)
-
-      word_seg2 = poseg.load_engine_Ac_automaton()
-      res = word_seg2.segment('工商部联合工商行政管理局执法')
-      print(res)
-      ```
+       word_seg1 = poseg.load_engine_DatTire()
+       text1 = '工商部联合工商行政管理局执法'
+       text2 = '一万九千下岗工人再就业率提高'
+       text3 = 'C++经常用于信息技术领域'
+       text4 = '我不想开学，我不想隔离'
+       res1 = word_seg1.segment(text1)
+       res2 = word_seg1.segment(text2)
+       res3 = word_seg1.segment(text3)
+       res4 = word_seg1.segment(text4)
+       print(res1)
+       print(res2)
+       print(res3)
+       print(res4)
+       
+       word_seg2 = poseg.load_engine_Ac_automaton()
+       res = word_seg2.segment('工商部联合工商行政管理局执法')
+       print(res)
+       ```
       最终输出结果(结果依赖与内置字典)
       dat树引擎
       ```
