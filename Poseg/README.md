@@ -1,21 +1,21 @@
 # Poseg模块用于分词
   - ### 2020.05.01 内置ac自动机和dat树两种引擎，其中ac自动机偷懒了，只能拿来学习用，实际跑起来速度及慢
   - ## 使用方法
+       - 导入Poseg模块
        ```python
        from Poseg import poseg
        ```
-       导入Poseg模块
+       - 选择需要的引擎加载
        ```python
        #dat树引擎
        word_seg = poseg.load_engine_DatTire()
        #ac自动机引擎
        word_seg = poseg.load_engine_Ac_automaton()
        ```
-       选择需要的引擎加载
+       - 对指定文本text进行分词，返回一个list
        ```python
        res = word_seg.segment(text)
        ```
-       对制定文本text进行分词，返回一个list
      - ps:如果使用自己的词典，而词典词数量过大，可能会造成dat树引擎下的base和check数组的越界
      - 可以使用poseg.load_engine_DatTire().resize(size)方法修改数组大小，但是只能改大不能改小
        
