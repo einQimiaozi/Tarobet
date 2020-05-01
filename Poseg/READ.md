@@ -16,6 +16,8 @@
        res = word_seg.segment(text)
        ```
        对制定文本text进行分词，返回一个list
+     - ps:如果使用自己的词典，而词典词数量过大，可能会造成dat树引擎下的base和check数组的越界
+     - 可以使用poseg.load_engine_DatTire().resize(size)方法修改数组大小，但是只能改大不能改小
        
   - ## 使用案例
        ```python
