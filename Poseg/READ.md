@@ -40,19 +40,19 @@
        print(res)
        ```
        
-      最终输出结果(结果依赖与内置字典)
-      dat树引擎
-      ```
-      ['工商部', '联合', '工商行政管理局', '执法']
-      ['一万九千', '下岗工人', '再就业率', '提高']
-      ['C++', '经常', '用于', '信息技术', '领域']
-      ['我', '不想', '开学', '，', '我', '不想', '隔离']
-      ```
-      ac自动机引擎
-      ```
-      Dictionary loading completed
-      Init finish,the numbers of words in the Dictionary is 349046
-      starting build.....
-      building finish
-      ['工商部', '联合工', '商行政管理局', '执法']
-      ```
+       最终输出结果(结果依赖与内置字典)
+       dat树引擎
+       ```
+       ['工商部', '联合', '工商行政管理局', '执法']
+       ['一万九千', '下岗工人', '再就业率', '提高']
+       ['C++', '经常', '用于', '信息技术', '领域']
+       ['我', '不想', '开学', '，', '我', '不想', '隔离']
+       ```
+       ac自动机引擎
+       ```
+       Dictionary loading completed
+       Init finish,the numbers of words in the Dictionary is 349046
+       starting build.....
+       building finish
+       ['工商部', '联合工', '商行政管理局', '执法']
+       ```
