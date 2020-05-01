@@ -4,3 +4,11 @@
        ```python
        from Poseg import poseg
        ```
+       导入Poseg模块
+       ```python
+       #dat树引擎
+       word_seg1 = poseg.load_engine_DatTire()
+       #ac自动机引擎
+       word_seg2 = poseg.load_engine_Ac_automaton()
+       ```
+       选择需要的引擎加载
