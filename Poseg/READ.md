@@ -17,7 +17,7 @@
        ```
        对制定文本text进行分词，返回一个list
        
- - ### 使用案例
+  - ## 使用案例
        ```python
        from Poseg import poseg
        #dat树
