@@ -84,7 +84,7 @@ class datTrie(object):
                     siblings[-1].rchild_pos += 1
             index+=1
         return siblings
-    #这部分负责查找每个节点合适的base状态值，使用了启发式搜索，我承认这部分是从komiya大神的darts-java里抄的，我是真没看懂.....
+    #这部分负责查找每个节点合适的base状态值，使用了启发式搜索
     #这里如果不想使用启发是搜索，那么另begin从0开始的穷举法也是可以的，效率略低
     def insert(self, siblings, parent_base_index:int):
         begin = 0   #当前状态的base值
