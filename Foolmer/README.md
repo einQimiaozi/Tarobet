@@ -64,7 +64,7 @@
   from tensorflow.keras.layers import Input, Dense,GlobalAveragePooling1D,Dropout
   from tensorflow.keras.models import Model
   from tensorflow.keras.optimizers import Adam,RMSprop
-  from Transformer import Transformer,MultiHeadAttention,Embedding,PositionalEncoding,Add
+  from Foolmer import Transformer,MultiHeadAttention,Embedding,PositionalEncoding,Add
   ```
   - 1.使用MultiHeadAttention训练imdb数据
   ```python
