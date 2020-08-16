@@ -31,8 +31,8 @@
    - 首先导入模块
    ```python
    from Vermit.vermit import Word2Vec
-     
    ```
+     
    - 初始化并训练
    ```python
    w2v = Word2Vec(Corpus_path='...',word_dim=400,window=5,epochs=5,sample=1e-5)
