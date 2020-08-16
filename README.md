@@ -1,11 +1,13 @@
 # Tarobet:一个基于python的自然语言处理工具箱
   - ## 包含以下工具
-       - 分词工具Poseg
-       - Transformer架构及MultiHeadAttention
-       - 词向量编码(未上线)
-       - 降维方法(未上线)
+       - 分词工具--->Poseg
+       - Transformer架构及MultiHeadAttention--->Foolmer
+       - Word2vec模型--->Vermit
        - seq2seq模型(未上线)
        - 关键词提取方法(未上线)
+       - 生成式模型(未上线)
+  - ## 2020.08.17 update
+       - Word2vec模型上线，直接用，跟tensorflow没关系，目前只包含了skip gram模型，优化方法直接使用negative sample
   - ## 2020.08.10 update
        - 基于深度学习框架keras的Transformer架构包Foolmer上线，具体使用方法详见包内readme
   - ## 2020.05.01 update
