@@ -14,7 +14,9 @@
    
    - Word2vec(word_dim,window=5,Corpus_path:str="",Corpus=[],negative_sample_nums=5,table_size=10**8,learning_rate=0.025,epochs=5,k=10000,sample=1e-3)
      
-     - 创建一个Word2vec模型并初始化，可以使用list作为语料输入，也可以直接读取文本文件，大多数超参数就是传统的word2vec的参数，k是sigmoid查表时划分的段落数，sample建议1e-6到1e-3之间，置为0时不开启subsampleing
+     - 创建一个Word2vec模型并初始化，可以使用list作为语料输入，也可以直接读取文本文件，大多数超参数就是传统的word2vec的参数，k是sigmoid查表时划分的段落数
+       
+     - sample建议1e-6到1e-3之间，置为0时不开启subsampleing
      
      - 返回一个Word2vec对象，使用该对象才可以进行训练及相似度计算
        
@@ -73,4 +75,5 @@
    [ 因子 : 0.9987967014488666 ]
    [ 持续 : 0.9987958439958227 ]
    ```
-  
+    
+  - 顺便说一下，因为语料使用的是实验室的数据，不方便外泄，所以这里就不上传了
