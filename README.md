@@ -1,4 +1,4 @@
-# Tarobet:python的自然语言处理工具箱
+# Tarobet:python自然语言处理工具箱
   - ## 包含以下工具
        - 分词工具--->Poseg
        - Transformer架构及MultiHeadAttention--->Foolmer
