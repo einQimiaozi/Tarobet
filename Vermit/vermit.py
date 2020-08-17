@@ -98,7 +98,7 @@ class Word2Vec(object):
         for _ in range(k):
             self.sigmoid_table.append(1 / (1+np.exp(-start)))
             start+=step
-
+    # sigmoid
     def sigmoid(self,x):
         if x <= -6:
             return 0
@@ -174,14 +174,66 @@ class Word2Vec(object):
                 # 处理句子位置
                 ss = se+1
                 se = ss
-
-    def train(self,mode="skip_gram"):
+    # cbow
+    def TrainForCbow(self):
+        ss = 0  # 句子开头
+        se = 0  # 句子末尾
+        while se < len(self.corpus):
+            if self.corpus[se] != "</s>":
+                se += 1
+            else:
+                sencentence = self.corpus[ss:se]
+                for pos, word in enumerate(sencentence):
+                    i = pos + ss
+                    if i % 1000 == 0 or i == self.Corpus_MAX_LENGTH - 1:
+                        print('\r', round((i + 1) / self.Corpus_MAX_LENGTH * 100) * "♥",
+                              end=' ==>  {}%'.format(round((i + 1) / self.Corpus_MAX_LENGTH * 100)))
+                    if i % self.proecssed_num == 0:
+                        self.Adaptive_learning(i)
+                    # 获取上下文(包括中心词)
+                    context_start, context_end = self.get_context_index(pos, se - ss)
+                    # 当前上下文在向量中的位置
+                    context_words = [self.vocab[word] for word in sencentence[context_start:context_end]]
+                    # 梯度缓存器
+                    e = 0
+                    # 负采样,和cbow不同，我们要进行len(context(w))次负采样，可以理解为对context中每个词进行一次负采样，但是由于最终我们希望通过中心词得出上下文，所以对中心次做多次即可
+                    neg_sample = self.negative_sample(word)
+                    # 组合成train数据，位置0为正样本，其他位置为负样本
+                    train_data = [self.vocab[word]] + neg_sample
+                    # 求上下文词向量的加权平均
+                    context_word = np.sum([self.word_vec[index] for index in context_words],axis=0)/(context_end-context_start)
+                    for sample in range(len(train_data)):
+                        # 本次要更新的权重
+                        current_theta_index = train_data[sample]
+                        # sigmoid
+                        sig = self.sigmoid(np.dot(context_word, self.theta[current_theta_index].T))
+                        # 计算梯度
+                        # 正例
+                        if sample == 0:
+                            gradient = (1 - sig) * self.learning_rate
+                        # 负例
+                        else:
+                            gradient = -sig * self.learning_rate
+                        # 梯度叠加
+                        e += gradient * self.theta[current_theta_index]
+                        # 更新权重矩阵
+                        self.theta[train_data[sample]] += gradient * context_word
+                    # 更新上下文词向量
+                    for index in context_words:
+                        self.word_vec[index] += e
+                # 处理句子位置
+                ss = se + 1
+                se = ss
+    # 外部接口
+    def train(self,mode="cbow"):
         if mode == "skip_gram":
             for i in range(self.epochs):
                 print("\nepochs {}".format(i+1))
                 self.TrainForSkipGram()
         elif mode == "cbow":
-            assert False, "Sorry, the cbow model hasn't been written yet..."
+            for i in range(self.epochs):
+                print("\nepochs {}".format(i+1))
+                self.TrainForCbow()
         else:
             assert False,"The parameter 'mode' is wrong and must be a string type with 'skip_gram' value of a or 'cbow'."
         print("\n")
@@ -202,7 +254,7 @@ class Word2Vec(object):
                 distence.append(1)
                 words[1] = word
             else:
-                temp = cosine(self.theta[i],wordvec)
+                temp = cosine(self.theta[i],wordvec)**0.5
                 distence.append(temp)
                 words[temp] = word
         distence.sort()
@@ -213,3 +265,32 @@ class Word2Vec(object):
             print("[ {} : {} ]".format(word,dis))
         print('\n')
         return res
+    # 获取词向量
+    def __getitem__(self, word):
+        if not isinstance(word,str):
+            assert False,"The parameter 'word' error should be type 'str'."
+        if word not in self.vocab:
+            print("similar word '{}' not in vocab".format(word))
+            return None
+        return self.theta[self.vocab[word]]
+    # 获取于当前传入向量最相近的词
+    def getSimilarWordForVector(self,vector,topn=10):
+        vector = np.array(vector)
+        words = dict()
+        dis = []
+        assert len(vector)==self.word_dim,"The dimension of parameter a should be the same as word-dim."
+        for word,trained in zip(self.vocab.keys(),self.theta):
+            temp = cosine(trained,vector)**0.5
+            dis.append(temp)
+            words[temp] = word
+        dis.sort()
+        res = [words[dis[i]] for i in range(topn)]
+        print('================================>')
+        print("The closest word is '{}'.".format(res[0]))
+        for r in res:
+            print("[ {} ]".format(r))
+        print('\n')
+        return res
+    # 判断传入单词是否在词典中
+    def __contains__(self, word):
+        return word in self.vocab
