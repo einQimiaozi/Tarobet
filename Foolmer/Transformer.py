@@ -7,7 +7,6 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Dropout, GlobalAveragePooling1D
 
 '''
-牢记，Transformer架构在处理文本的时候是以词为单位
 所以代码中的所有embedding都代表的是一句话，而不是输入的整个语料库
 计算全部使用32位
 根据keras官方文档,build方法定义权重,call方法编写逻辑,compute_output_shape方法改变输入->输出张量的形状变化
